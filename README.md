@@ -1,10 +1,12 @@
 # ArduinoSpiBridge
 ## USB to SPI bridge (Transmit Only)
 Copyright (C) Bowtie Technology, Inc.
-Released under the terms of the MIT License. Google it. It's rad.
-It's also in this repo for reference. 
+Released under the terms of the MIT License. 
 
-A simple transmit-only USB -> SPI bridge, designed for the Arduino Nano. 
+A simple transmit-only USB -> SPI bridge, designed for the Arduino Nano:
+https://store.arduino.cc/usa/arduino-nano
+
+They're cheaper on Amazon, but official seemed right to put in here. 
 
 Spitting data mercilessly at this may break it; make sure your command
 characters are appropriate:
