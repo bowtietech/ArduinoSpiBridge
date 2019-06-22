@@ -8,10 +8,12 @@ https://store.arduino.cc/usa/arduino-nano
 
 They're cheaper on Amazon, but official seemed right to put in here. 
 
+```
 Timing:
 
 UART (USB Serial) - 115200 baud
 SPI               - 125000 baud
+```
 
 Characters are transfered by sending a command, followed by options 
 (if available), then data. 
