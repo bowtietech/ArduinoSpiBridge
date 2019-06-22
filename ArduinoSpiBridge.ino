@@ -23,7 +23,7 @@
 // ===========================================================================
 // Hardware Configuration
 #define CS_PIN      9   // Chip Select pin number (Active Low)
-#define LED_PIN     13  // LED transfer indicator pin number
+// #define LED_PIN     13  // LED transfer indicator pin number
 
 
 // ===========================================================================
@@ -39,10 +39,10 @@ void setup()
   pinMode(CS_PIN, OUTPUT);    // Set the CS pin to an output
 
   // SPI Configuration
-  SPI.setBitOrder(MSBFIRST);            // Set the bit order for SPI
-  SPI.setClockDivider(SPI_CLOCK_DIV64); // Set the SPI Clock Divider (125 kHz)
-  SPI.setDataMode(SPI_MODE0);           // Set the SPI Mode
-  SPI.begin();                          // Kick off the SPI
+  SPI.setBitOrder(MSBFIRST);              // Set the bit order 
+  SPI.setClockDivider(SPI_CLOCK_DIV128);  // Set the Clock Divider (125 kHz)
+  SPI.setDataMode(SPI_MODE0);             // Set the SPI Mode
+  SPI.begin();                            // Kick off the SPI
 }
 
 
@@ -95,7 +95,7 @@ void loop()
 
   charCount = 0;  // Reset Character Count
   
-  digitalWrite(LED_PIN, 1); // Turn on the LED (Before CS Enable)
+  // digitalWrite(LED_PIN, 1); // Turn on the LED (Before CS Enable)
   digitalWrite(CS_PIN, 0);  // Enable Chip Select (Active Low)
 
   // Write the appropriate amount of data
@@ -112,7 +112,7 @@ void loop()
 
   // Disable Chip Select
   digitalWrite(CS_PIN, 1);  // Disable Chip Select (Active Low)
-  digitalWrite(LED_PIN, 0); // Turn off the LED (After CS Disabled)
+  // digitalWrite(LED_PIN, 0); // Turn off the LED (After CS Disabled)
 
   delayMicroseconds(10);    // Wait a bit, let any ISRs process
 }
