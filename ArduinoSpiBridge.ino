@@ -30,13 +30,19 @@
 // Hardware Initialization
 void setup()
 {
-  Serial.begin(115200);
-  digitalWrite(CS_PIN, 1);
-  pinMode(CS_PIN, OUTPUT);
-  SPI.setBitOrder(MSBFIRST);
-  SPI.setClockDivider(SPI_CLOCK_DIV64);
-  SPI.setDataMode(SPI_MODE0);
-  SPI.begin();
+  // Serial Configuration
+  Serial.begin(115200);       // Kick off the serial at 115,200 baud
+  Serial.println("SPI Bridge Active");
+
+  // Pin Configuration
+  digitalWrite(CS_PIN, 1);    // Set the CS pin to output HIGH (Disabled)
+  pinMode(CS_PIN, OUTPUT);    // Set the CS pin to an output
+
+  // SPI Configuration
+  SPI.setBitOrder(MSBFIRST);            // Set the bit order for SPI
+  SPI.setClockDivider(SPI_CLOCK_DIV64); // Set the SPI Clock Divider (125 kHz)
+  SPI.setDataMode(SPI_MODE0);           // Set the SPI Mode
+  SPI.begin();                          // Kick off the SPI
 }
 
 
@@ -44,10 +50,10 @@ void setup()
 // Main Loop
 void loop()
 {
-  unsigned int  dataLength  = 0;
-  unsigned int  charCount   = 0;
-  unsigned char inputChar   = '\0';
-  unsigned char commandChar = '\0';
+  unsigned int  dataLength  = 0;    // Data Length setting from client
+  unsigned int  charCount   = 0;    // Current character count during transfer
+  unsigned char inputChar   = '\0'; // Input character container
+  unsigned char commandChar = '\0'; // Command character container
 
   // Wait for serial data in
   while (!Serial.available());
