@@ -9,6 +9,16 @@ https://store.arduino.cc/usa/arduino-nano
 
 They're cheaper on Amazon, but official seemed right to put in here. 
 
+```
+Timing:
+
+UART (USB Serial) - 115200 baud
+SPI               - 125000 baud
+```
+
+Characters are transfered by sending a command, followed by options 
+(if available), then data. 
+
 Spitting data mercilessly at this may break it; make sure your command
 characters are appropriate:
 
@@ -21,5 +31,6 @@ characters are appropriate:
                       write, effectively locking the system and providing 
                       junk results.
 ```
+
 
 EOF
