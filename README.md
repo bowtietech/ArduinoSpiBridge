@@ -3,7 +3,8 @@
 Copyright (C) Bowtie Technology, Inc.
 Released under the terms of the MIT License. 
 
-A simple transmit-only USB -> SPI bridge, designed for the Arduino Nano:
+A simple transmit-only USB -> SPI bridge, designed for the ESP8266 (specifically Wemos D1 Mini) or Arduino Nano (may require CS pin 
+reselection):
 https://store.arduino.cc/usa/arduino-nano
 
 They're cheaper on Amazon, but official seemed right to put in here. 
