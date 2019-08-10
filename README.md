@@ -32,5 +32,14 @@ characters are appropriate:
                       junk results.
 ```
 
+### Wiring
+
+```
+WEMOS ESP8x  
+G  [GND]     
+D5 [CLK]     
+D7 [MOSI]    
+D0 [CS#]     
+```
 
 EOF
