@@ -18,12 +18,12 @@
 
 // ===========================================================================
 // Software Configuration
-#define ECHO_ON     0   // Echo characters over serial
-
+#define ECHO_ON     1   // Echo characters over serial
+//#define TEST_MODE_COUNTING  // Uncomment to make it count up each byte
 // ===========================================================================
 // Hardware Configuration
-#define CS_PIN      9   // Chip Select pin number (Active Low)
- #define LED_PIN     13  // LED transfer indicator pin number
+#define CS_PIN      16   // Chip Select pin number (Active Low)
+#define LED_PIN     13  // LED transfer indicator pin number
 
 
 // ===========================================================================
@@ -32,6 +32,7 @@ void setup()
 {
   // Serial Configuration
   Serial.begin(115200);       // Kick off the serial at 115,200 baud
+  Serial.println("");
   Serial.println("SPI Bridge Active");
 
   // Pin Configuration
@@ -43,10 +44,17 @@ void setup()
   // SPI Configuration
   SPI.setBitOrder(MSBFIRST);              // Set the bit order 
   SPI.setClockDivider(SPI_CLOCK_DIV128);  // Set the Clock Divider (125 kHz)
+//  SPI.setFrequency(400000);             // Set Clock Frequency
   SPI.setDataMode(SPI_MODE0);             // Set the SPI Mode
   SPI.begin();                            // Kick off the SPI
+    SPI.setClockDivider(SPI_CLOCK_DIV8);  // Set the Clock Divider (125 kHz)
+  SPI.setFrequency(1000000);             // Set Clock Frequency
+  
 }
 
+#ifdef TEST_MODE_COUNTING
+  unsigned char testChar = 0x1; // Test character
+#endif 
 
 // ===========================================================================
 // Main Loop
@@ -57,11 +65,19 @@ void loop()
   unsigned char inputChar   = '\0'; // Input character container
   unsigned char commandChar = '\0'; // Command character container
 
+#ifdef TEST_MODE_COUNTING
+
+  commandChar = '4';
+
+#else
+
   // Wait for serial data in
   while (!Serial.available());
 
   // Get the command byte
   commandChar = Serial.read();
+
+#endif
   
   switch (commandChar)
   {
@@ -108,7 +124,11 @@ void loop()
   while (charCount < dataLength) 
   {
     while (!Serial.available());  // Wait for the next byte to be available
+#ifdef TEST_MODE_COUNTING
+    inputChar = testChar;
+#else
     inputChar = Serial.read();    // Grab it by the bits
+#endif
     SPI.transfer(inputChar);      // Transfer it via SPI
     charCount++;                  // Tally it up
 #if ECHO_ON
@@ -120,7 +140,12 @@ void loop()
   digitalWrite(CS_PIN, 1);  // Disable Chip Select (Active Low)
   digitalWrite(LED_PIN, 0); // Turn off the LED (After CS Disabled)
 
+#ifdef TEST_MODE_COUNTING
+  testChar++;
+   delay(2000);
+#else
   delayMicroseconds(10);    // Wait a bit, let any ISRs process
+#endif
 }
 
 // EOF
