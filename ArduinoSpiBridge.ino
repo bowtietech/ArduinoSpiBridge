@@ -19,7 +19,7 @@
 // ===========================================================================
 // Software Configuration
 #define ECHO_ON     1   // Echo characters over serial
-//#define TEST_MODE_COUNTING  // Uncomment to make it count up each byte
+#define TEST_MODE_COUNTING  // Uncomment to make it count up each byte
 // ===========================================================================
 // Hardware Configuration
 #define CS_PIN      16   // Chip Select pin number (Active Low)
@@ -123,10 +123,10 @@ void loop()
   // Write the appropriate amount of data
   while (charCount < dataLength) 
   {
-    while (!Serial.available());  // Wait for the next byte to be available
 #ifdef TEST_MODE_COUNTING
     inputChar = testChar;
 #else
+    while (!Serial.available());  // Wait for the next byte to be available
     inputChar = Serial.read();    // Grab it by the bits
 #endif
     SPI.transfer(inputChar);      // Transfer it via SPI
