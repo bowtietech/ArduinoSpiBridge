@@ -19,7 +19,7 @@
 // ===========================================================================
 // Software Configuration
 #define ECHO_ON     1   // Echo characters over serial
-#define TEST_MODE_COUNTING  // Uncomment to make it count up each byte
+//#define TEST_MODE_COUNTING  // Uncomment to make it count up each byte
 // ===========================================================================
 // Hardware Configuration
 #define CS_PIN      16   // Chip Select pin number (Active Low)
@@ -36,19 +36,18 @@ void setup()
   Serial.println("SPI Bridge Active");
 
   // Pin Configuration
-  digitalWrite(CS_PIN, 1);    // Set the CS pin to output HIGH (Disabled)
-  pinMode(CS_PIN, OUTPUT);    // Set the CS pin to an output
-  digitalWrite(LED_PIN, 0);    // Set the LED pin to output LOW (Disabled)
-  pinMode(LED_PIN, OUTPUT);    // Set the LED pin to an output
+  digitalWrite(CS_PIN, 1);      // Set the CS pin to output HIGH (Disabled)
+  pinMode(CS_PIN, OUTPUT);      // Set the CS pin to an output
+  digitalWrite(LED_PIN, 0);     // Set the LED pin to output LOW (Disabled)
+  pinMode(LED_PIN, OUTPUT);     // Set the LED pin to an output
 
   // SPI Configuration
   SPI.setBitOrder(MSBFIRST);              // Set the bit order 
   SPI.setClockDivider(SPI_CLOCK_DIV128);  // Set the Clock Divider (125 kHz)
-//  SPI.setFrequency(400000);             // Set Clock Frequency
   SPI.setDataMode(SPI_MODE0);             // Set the SPI Mode
   SPI.begin();                            // Kick off the SPI
-    SPI.setClockDivider(SPI_CLOCK_DIV8);  // Set the Clock Divider (125 kHz)
-  SPI.setFrequency(1000000);             // Set Clock Frequency
+  SPI.setClockDivider(SPI_CLOCK_DIV8);    // Set the Clock Divider (125 kHz)
+  SPI.setFrequency(125000);               // Set Clock Frequency
   
 }
 
